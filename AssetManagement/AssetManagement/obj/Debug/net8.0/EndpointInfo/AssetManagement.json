@@ -1,0 +1,1895 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "AssetManagement",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Asset": {
+      "get": {
+        "tags": [
+          "Asset"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetReadDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetReadDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetReadDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Asset/{id}": {
+      "get": {
+        "tags": [
+          "Asset"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Asset"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Asset"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Asset"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Asset"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Asset"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetAudit": {
+      "get": {
+        "tags": [
+          "AssetAudit"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AssetAudit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetAuditCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetAuditCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetAuditCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetAudit/{id}": {
+      "get": {
+        "tags": [
+          "AssetAudit"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AssetAudit"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetAudit"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetAudit"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetAudit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AssetAudit"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetAudit/TriggerAll": {
+      "post": {
+        "tags": [
+          "AssetAudit"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetAudit/{id}/status": {
+      "patch": {
+        "tags": [
+          "AssetAudit"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetCategory": {
+      "get": {
+        "tags": [
+          "AssetCategory"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetCategoryReadDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetCategoryReadDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetCategoryReadDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AssetCategory"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCategoryCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCategoryCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCategoryCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetCategory/{id}": {
+      "get": {
+        "tags": [
+          "AssetCategory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AssetCategory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCategory"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCategory"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCategory"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AssetCategory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetServiceRequest": {
+      "get": {
+        "tags": [
+          "AssetServiceRequest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AssetServiceRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetServiceRequestCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetServiceRequestCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetServiceRequestCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetServiceRequest/{id}": {
+      "get": {
+        "tags": [
+          "AssetServiceRequest"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AssetServiceRequest"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetServiceRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetServiceRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetServiceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AssetServiceRequest"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/forgot-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/reset-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Employee": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeReadDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeReadDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeeReadDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Employee/{id}": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EmployeeAssetAllocation": {
+      "get": {
+        "tags": [
+          "EmployeeAssetAllocation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "EmployeeAssetAllocation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetAllocationCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetAllocationCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetAllocationCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EmployeeAssetAllocation/{id}": {
+      "get": {
+        "tags": [
+          "EmployeeAssetAllocation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EmployeeAssetAllocation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetAllocation"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetAllocation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetAllocation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EmployeeAssetAllocation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EmployeeAssetAllocation/approve": {
+      "put": {
+        "tags": [
+          "EmployeeAssetAllocation"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllocationApproveDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllocationApproveDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AllocationApproveDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LoginHistory": {
+      "get": {
+        "tags": [
+          "LoginHistory"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LoginHistory"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginHistoryCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginHistoryCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginHistoryCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/LoginHistory/{id}": {
+      "get": {
+        "tags": [
+          "LoginHistory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LoginHistory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginHistory"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginHistory"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginHistory"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LoginHistory"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AllocationApproveDto": {
+        "type": "object",
+        "properties": {
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Asset": {
+        "required": [
+          "assetCategoryID",
+          "assetNo",
+          "assetStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetNo": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "assetName": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "assetCategoryID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetCategory": {
+            "$ref": "#/components/schemas/AssetCategory"
+          },
+          "assetModel": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturingDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "assetValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "assetStatus": {
+            "$ref": "#/components/schemas/AssetStatus"
+          },
+          "imageURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "allocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmployeeAssetAllocation"
+            },
+            "nullable": true
+          },
+          "audits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetAudit"
+            },
+            "nullable": true
+          },
+          "serviceRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetServiceRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetAudit": {
+        "required": [
+          "assetID",
+          "employeeID",
+          "requestDate",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "auditID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/Employee"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetAuditCreateDto": {
+        "type": "object",
+        "properties": {
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetCategory": {
+        "type": "object",
+        "properties": {
+          "assetCategoryID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Asset"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetCategoryCreateDto": {
+        "type": "object",
+        "properties": {
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetCategoryReadDto": {
+        "type": "object",
+        "properties": {
+          "assetCategoryID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetCreateDto": {
+        "type": "object",
+        "properties": {
+          "assetNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetName": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetCategoryID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "manufacturingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "expiryDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "assetValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "assetStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageURL": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetReadDto": {
+        "type": "object",
+        "properties": {
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetName": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetModel": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "imageURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetServiceRequest": {
+        "required": [
+          "assetID",
+          "employeeID",
+          "issueType",
+          "requestDate",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "serviceRequestID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "issueType": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/Employee"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetServiceRequestCreateDto": {
+        "type": "object",
+        "properties": {
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "issueType": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssetStatus": {
+        "enum": [
+          "Available",
+          "Borrowed",
+          "InService",
+          "Damaged",
+          "Retired"
+        ],
+        "type": "string"
+      },
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "passwordHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "resetToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "resetTokenExpiry": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "assetAllocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmployeeAssetAllocation"
+            },
+            "nullable": true
+          },
+          "serviceRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetServiceRequest"
+            },
+            "nullable": true
+          },
+          "assetAudits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetAudit"
+            },
+            "nullable": true
+          },
+          "loginHistories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LoginHistory"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeAssetAllocation": {
+        "required": [
+          "allocationDate",
+          "assetID",
+          "employeeID",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "allocationID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allocationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "returnDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "employee": {
+            "$ref": "#/components/schemas/Employee"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeAssetAllocationCreateDto": {
+        "type": "object",
+        "properties": {
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assetID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "allocationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "returnDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeReadDto": {
+        "type": "object",
+        "properties": {
+          "employeeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ForgotPasswordRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginHistory": {
+        "required": [
+          "loginTime",
+          "userID"
+        ],
+        "type": "object",
+        "properties": {
+          "loginID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "loginTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "logoutTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "jwtToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/Employee"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginHistoryCreateDto": {
+        "type": "object",
+        "properties": {
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "loginTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "logoutTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "jwtToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResetPasswordRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Enter 'Bearer' + space + token",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

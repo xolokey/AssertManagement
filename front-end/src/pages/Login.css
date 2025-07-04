@@ -1,0 +1,68 @@
+.login-bg {
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+/* This wraps logo + card and keeps it vertically centered */
+.login-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 90vh;
+  overflow: hidden;
+  gap: 1rem;
+}
+
+/* Larger logo without pushing layout */
+/* Login.css */
+.login-logo {
+  width: 500px;           /* Increase width */
+  height: auto;           /* Maintain aspect ratio */
+  object-fit: contain;   /* Keeps it clean */
+  margin-right: -20px;
+  margin-top: -170px;
+  margin-bottom: -200px;
+  max-width: 100vw;        /* Prevents it from overflowing */
+}
+
+
+/* login card */
+.login-card {
+  width: 300px;
+  max-width: 420px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 16px;
+  backdrop-filter: blur(3px);
+  padding: 1.5rem;
+}
+
+/* input styles */
+.bg-input {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.bg-input::placeholder { color: rgba(255,255,255,0.65); }
+.bg-input:focus {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.4);
+  outline: none;
+}
+
+/* button hover */
+.login-btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.login-btn:hover,
+.login-btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
+}
