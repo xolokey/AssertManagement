@@ -25,21 +25,28 @@ namespace AssetManagement.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<AssetReadDto>>> GetAll()
         {
-            var assets = await _assetService.GetAllWithCategoryAsync(); // Include Category
-
-            var dtoList = assets.Select(a => new AssetReadDto
+            try
             {
-                AssetID = a.AssetID,
-                AssetNo = a.AssetNo,
-                AssetName = a.AssetName,
-                AssetModel = a.AssetModel,
-                AssetStatus = a.AssetStatus.ToString(),
-                AssetValue = a.AssetValue,
-                ImageURL = a.ImageURL,
-                CategoryName = a.AssetCategory?.CategoryName ?? "Uncategorized"
-            });
+                var assets = await _assetService.GetAllWithCategoryAsync(); // Include Category
 
-            return Ok(dtoList);
+                var dtoList = assets.Select(a => new AssetReadDto
+                {
+                    AssetID = a.AssetID,
+                    AssetNo = a.AssetNo,
+                    AssetName = a.AssetName,
+                    AssetModel = a.AssetModel,
+                    AssetStatus = a.AssetStatus.ToString(),
+                    AssetValue = a.AssetValue,
+                    ImageURL = a.ImageURL,
+                    CategoryName = a.AssetCategory?.CategoryName ?? "Uncategorized"
+                });
+
+                return Ok(dtoList);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
 
@@ -47,44 +54,56 @@ namespace AssetManagement.Controllers
         [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
-            var asset = await _assetService.GetByIdAsync(id);
-            if (asset == null)
-                return NotFound();
-            var dto = new AssetReadDto
+            try
             {
-                AssetID = asset.AssetID,
-                AssetNo = asset.AssetNo,
-                AssetName = asset.AssetName,
-                AssetModel = asset.AssetModel,
-                AssetStatus = asset.AssetStatus.ToString(),
-                AssetValue = asset.AssetValue,
-                ImageURL = asset.ImageURL,
-                CategoryName = asset.AssetCategory?.CategoryName ?? "Uncategorized"
-            };
-            return Ok(dto);
+                var asset = await _assetService.GetByIdAsync(id);
+                if (asset == null)
+                    return NotFound();
+                var dto = new AssetReadDto
+                {
+                    AssetID = asset.AssetID,
+                    AssetNo = asset.AssetNo,
+                    AssetName = asset.AssetName,
+                    AssetModel = asset.AssetModel,
+                    AssetStatus = asset.AssetStatus.ToString(),
+                    AssetValue = asset.AssetValue,
+                    ImageURL = asset.ImageURL,
+                    CategoryName = asset.AssetCategory?.CategoryName ?? "Uncategorized"
+                };
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(AssetCreateDto dto)
         {
-            var asset = new Asset
+            try
             {
-                AssetNo = dto.AssetNo,
-                AssetName = dto.AssetName,
-                AssetCategoryID = dto.AssetCategoryID,
-                AssetModel = dto.AssetModel,
-                ManufacturingDate = dto.ManufacturingDate,
-                ExpiryDate = dto.ExpiryDate,
-                AssetValue = dto.AssetValue,
-                AssetStatus = Enum.TryParse<AssetStatus>(dto.AssetStatus, true, out var status)
-                              ? status
-                              : AssetStatus.Available,
-                ImageURL = dto.ImageURL
-            };
+                var asset = new Asset
+                {
+                    AssetNo = dto.AssetNo,
+                    AssetName = dto.AssetName,
+                    AssetCategoryID = dto.AssetCategoryID,
+                    AssetModel = dto.AssetModel,
+                    ManufacturingDate = dto.ManufacturingDate,
+                    ExpiryDate = dto.ExpiryDate,
+                    AssetValue = dto.AssetValue,
+                    AssetStatus = Enum.TryParse<AssetStatus>(dto.AssetStatus, true, out var status)
+                                  ? status
+                                  : AssetStatus.Available,
+                    ImageURL = dto.ImageURL
+                };
 
-            await _assetService.CreateAsync(asset);
-            return Ok("Asset created");
+                await _assetService.CreateAsync(asset);
+                return Ok("Asset created");
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
         }
 
 
@@ -94,16 +113,30 @@ namespace AssetManagement.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, Asset asset)
         {
-            var updated = await _assetService.UpdateAsync(id, asset);
-            return updated == null ? NotFound() : Ok(updated);
+            try
+            {
+                var updated = await _assetService.UpdateAsync(id, asset);
+                return updated == null ? NotFound() : Ok(updated);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
-            var deleted = await _assetService.DeleteAsync(id);
-            return deleted ? NoContent() : NotFound();
+            try
+            {
+                var deleted = await _assetService.DeleteAsync(id);
+                return deleted ? NoContent() : NotFound();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
