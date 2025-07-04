@@ -1,0 +1,15 @@
+# Ignore Visual Studio temporary files
+.vs/
+*.user
+*.suo
+
+# Ignore build output
+bin/
+obj/
+
+# Node modules (if using React/Node)
+node_modules/
+
+# System files
+*.DS_Store
+Thumbs.db
