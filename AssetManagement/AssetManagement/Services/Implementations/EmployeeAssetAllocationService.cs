@@ -24,60 +24,88 @@ namespace AssetManagement.Services.Implementations
 
         public async Task<EmployeeAssetAllocation> CreateAsync(EmployeeAssetAllocation alloc)
         {
-            _context.EmployeeAssetAllocations.Add(alloc);
-            await _context.SaveChangesAsync();
-            return alloc;
+            try
+            {
+                _context.EmployeeAssetAllocations.Add(alloc);
+                await _context.SaveChangesAsync();
+                return alloc;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<EmployeeAssetAllocation?> UpdateAsync(int id, EmployeeAssetAllocation alloc)
         {
-            var existing = await _context.EmployeeAssetAllocations.FindAsync(id);
-            if (existing == null) return null;
+            try
+            {
+                var existing = await _context.EmployeeAssetAllocations.FindAsync(id);
+                if (existing == null) return null;
 
-            existing.EmployeeID = alloc.EmployeeID;
-            existing.AssetID = alloc.AssetID;
-            existing.AllocationDate = alloc.AllocationDate;
-            existing.ReturnDate = alloc.ReturnDate;
-            existing.Status = alloc.Status;
-            await _context.SaveChangesAsync();
-            return existing;
+                existing.EmployeeID = alloc.EmployeeID;
+                existing.AssetID = alloc.AssetID;
+                existing.AllocationDate = alloc.AllocationDate;
+                existing.ReturnDate = alloc.ReturnDate;
+                existing.Status = alloc.Status;
+                await _context.SaveChangesAsync();
+                return existing;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var rec = await _context.EmployeeAssetAllocations.FindAsync(id);
-            if (rec == null) return false;
-            _context.EmployeeAssetAllocations.Remove(rec);
-            await _context.SaveChangesAsync();
-            return true;
+            try
+            {
+                var rec = await _context.EmployeeAssetAllocations.FindAsync(id);
+                if (rec == null) return false;
+                _context.EmployeeAssetAllocations.Remove(rec);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         /* ▶️ NEW: Approve or create allocation */
         public async Task<EmployeeAssetAllocation> ApproveAsync(int employeeId, int assetId)
         {
-            var existing = await _context.EmployeeAssetAllocations
-                .FirstOrDefaultAsync(a => a.EmployeeID == employeeId &&
-                                          a.AssetID == assetId &&
-                                          a.Status == "Requested");
-
-            if (existing != null)
+            try
             {
-                existing.Status = "Allocated";
-                existing.AllocationDate = DateTime.Now;
+                var existing = await _context.EmployeeAssetAllocations
+                    .FirstOrDefaultAsync(a => a.EmployeeID == employeeId &&
+                                              a.AssetID == assetId &&
+                                              a.Status == "Requested");
+
+                if (existing != null)
+                {
+                    existing.Status = "Allocated";
+                    existing.AllocationDate = DateTime.Now;
+                    await _context.SaveChangesAsync();
+                    return existing;
+                }
+
+                var alloc = new EmployeeAssetAllocation
+                {
+                    EmployeeID = employeeId,
+                    AssetID = assetId,
+                    AllocationDate = DateTime.Now,
+                    Status = "Allocated"
+                };
+                _context.EmployeeAssetAllocations.Add(alloc);
                 await _context.SaveChangesAsync();
-                return existing;
+                return alloc;
             }
-
-            var alloc = new EmployeeAssetAllocation
+            catch (Exception ex)
             {
-                EmployeeID = employeeId,
-                AssetID = assetId,
-                AllocationDate = DateTime.Now,
-                Status = "Allocated"
-            };
-            _context.EmployeeAssetAllocations.Add(alloc);
-            await _context.SaveChangesAsync();
-            return alloc;
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

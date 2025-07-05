@@ -16,47 +16,82 @@ namespace AssetManagement.Services.Implementations
 
         public async Task<IEnumerable<LoginHistory>> GetAllAsync()
         {
-            return await _context.LoginHistories
-                .Include(l => l.User)
-                .ToListAsync();
+            try
+            {
+                return await _context.LoginHistories
+                    .Include(l => l.User)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<LoginHistory?> GetByIdAsync(int id)
         {
-            return await _context.LoginHistories
-                .Include(l => l.User)
-                .FirstOrDefaultAsync(l => l.LoginID == id);
+            try
+            {
+                return await _context.LoginHistories
+                    .Include(l => l.User)
+                    .FirstOrDefaultAsync(l => l.LoginID == id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<LoginHistory> CreateAsync(LoginHistory login)
         {
-            _context.LoginHistories.Add(login);
-            await _context.SaveChangesAsync();
-            return login;
+            try
+            {
+                _context.LoginHistories.Add(login);
+                await _context.SaveChangesAsync();
+                return login;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<LoginHistory?> UpdateAsync(int id, LoginHistory login)
         {
-            var existing = await _context.LoginHistories.FindAsync(id);
-            if (existing == null) return null;
+            try
+            {
+                var existing = await _context.LoginHistories.FindAsync(id);
+                if (existing == null) return null;
 
-            existing.UserID = login.UserID;
-            existing.LoginTime = login.LoginTime;
-            existing.LogoutTime = login.LogoutTime;
-            existing.JWTToken = login.JWTToken;
+                existing.UserID = login.UserID;
+                existing.LoginTime = login.LoginTime;
+                existing.LogoutTime = login.LogoutTime;
+                existing.JWTToken = login.JWTToken;
 
-            await _context.SaveChangesAsync();
-            return existing;
+                await _context.SaveChangesAsync();
+                return existing;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var login = await _context.LoginHistories.FindAsync(id);
-            if (login == null) return false;
+            try
+            {
+                var login = await _context.LoginHistories.FindAsync(id);
+                if (login == null) return false;
 
-            _context.LoginHistories.Remove(login);
-            await _context.SaveChangesAsync();
-            return true;
+                _context.LoginHistories.Remove(login);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
