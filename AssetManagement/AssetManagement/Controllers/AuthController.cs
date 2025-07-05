@@ -98,7 +98,7 @@ namespace AssetManagement.Controllers
                 user.ResetTokenExpiry = DateTime.UtcNow.AddHours(1);
                 await _context.SaveChangesAsync();
 
-                var link = $"http://localhost:3000/reset-password?token={token}";
+                var link = $"http://localhost:3000/reset-password?token={token},http://localhost:5173/reset-password?token={token}";
                 await _emailService.SendEmailAsync(user.Email,
                     "HexaTrack Password Reset",
                     $"<p>Hello {user.Name},</p><p>Click the link below to reset your password:</p><p><a href=\"{link}\">Reset Password</a></p><p>This link expires in 1 hour.</p>");
