@@ -22,69 +22,104 @@ namespace AssetManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var logs = await _service.GetAllAsync();
-
-            var dtoList = logs.Select(l => new LoginHistoryReadDto
+            try
             {
-                LoginID = l.LoginID,
-                UserName = l.User?.Name ?? $"User {l.UserID}",
-                LoginTime = l.LoginTime,
-                LogoutTime = l.LogoutTime,
-                JwtToken = l.JWTToken
-            });
+                var logs = await _service.GetAllAsync();
 
-            return Ok(dtoList);
+                var dtoList = logs.Select(l => new LoginHistoryReadDto
+                {
+                    LoginID = l.LoginID,
+                    UserName = l.User?.Name ?? $"User {l.UserID}",
+                    LoginTime = l.LoginTime,
+                    LogoutTime = l.LogoutTime,
+                    JwtToken = l.JWTToken
+                });
+
+                return Ok(dtoList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // GET: api/LoginHistory/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var log = await _service.GetByIdAsync(id);
-            if (log == null) return NotFound();
-
-            var dto = new LoginHistoryReadDto
+            try
             {
-                LoginID = log.LoginID,
-                UserName = log.User?.Name ?? $"User {log.UserID}",
-                LoginTime = log.LoginTime,
-                LogoutTime = log.LogoutTime,
-                JwtToken = log.JWTToken
-            };
+                var log = await _service.GetByIdAsync(id);
+                if (log == null) return NotFound();
 
-            return Ok(dto);
+                var dto = new LoginHistoryReadDto
+                {
+                    LoginID = log.LoginID,
+                    UserName = log.User?.Name ?? $"User {log.UserID}",
+                    LoginTime = log.LoginTime,
+                    LogoutTime = log.LogoutTime,
+                    JwtToken = log.JWTToken
+                };
+
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // POST: api/LoginHistory
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] LoginHistoryCreateDto dto)
         {
-            var login = new LoginHistory
+            try
             {
-                UserID = dto.UserID,
-                LoginTime = dto.LoginTime,
-                LogoutTime = dto.LogoutTime,
-                JWTToken = dto.JwtToken
-            };
+                var login = new LoginHistory
+                {
+                    UserID = dto.UserID,
+                    LoginTime = dto.LoginTime,
+                    LogoutTime = dto.LogoutTime,
+                    JWTToken = dto.JwtToken
+                };
 
-            var created = await _service.CreateAsync(login);
-            return CreatedAtAction(nameof(GetById), new { id = created.LoginID }, created);
+                var created = await _service.CreateAsync(login);
+                return CreatedAtAction(nameof(GetById), new { id = created.LoginID }, created);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // PUT: api/LoginHistory/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] LoginHistory login)
         {
-            var updated = await _service.UpdateAsync(id, login);
-            return updated == null ? NotFound() : Ok(updated);
+            try
+            {
+                var updated = await _service.UpdateAsync(id, login);
+                return updated == null ? NotFound() : Ok(updated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // DELETE: api/LoginHistory/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var deleted = await _service.DeleteAsync(id);
-            return deleted ? NoContent() : NotFound();
+            try
+            {
+                var deleted = await _service.DeleteAsync(id);
+                return deleted ? NoContent() : NotFound();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
     }
 }

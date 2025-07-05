@@ -23,14 +23,21 @@ namespace AssetManagement.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<AssetCategoryReadDto>>> GetAll()
         {
-            var categories = await _service.GetAllAsync();
-            var dtoList = categories.Select(c => new AssetCategoryReadDto
+            try
             {
-                AssetCategoryID = c.AssetCategoryID,
-                CategoryName = c.CategoryName
-            });
+                var categories = await _service.GetAllAsync();
+                var dtoList = categories.Select(c => new AssetCategoryReadDto
+                {
+                    AssetCategoryID = c.AssetCategoryID,
+                    CategoryName = c.CategoryName
+                });
 
-            return Ok(dtoList);
+                return Ok(dtoList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // GET: api/AssetCategory/{id}
@@ -38,16 +45,23 @@ namespace AssetManagement.Controllers
         [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
-            var cat = await _service.GetByIdAsync(id);
-            if (cat == null) return NotFound();
-
-            var dto = new AssetCategoryReadDto
+            try
             {
-                AssetCategoryID = cat.AssetCategoryID,
-                CategoryName = cat.CategoryName
-            };
+                var cat = await _service.GetByIdAsync(id);
+                if (cat == null) return NotFound();
 
-            return Ok(dto);
+                var dto = new AssetCategoryReadDto
+                {
+                    AssetCategoryID = cat.AssetCategoryID,
+                    CategoryName = cat.CategoryName
+                };
+
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // POST: api/AssetCategory
@@ -55,13 +69,20 @@ namespace AssetManagement.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(AssetCategoryCreateDto dto)
         {
-            var category = new AssetCategory
+            try
             {
-                CategoryName = dto.CategoryName
-            };
+                var category = new AssetCategory
+                {
+                    CategoryName = dto.CategoryName
+                };
 
-            await _service.CreateAsync(category);
-            return Ok("Category created");
+                await _service.CreateAsync(category);
+                return Ok("Category created");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // PUT: api/AssetCategory/{id}
@@ -69,10 +90,17 @@ namespace AssetManagement.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, [FromBody] AssetCategory category)
         {
-            var updated = await _service.UpdateAsync(id, category);
-            if (updated == null)
-                return NotFound();
-            return Ok(updated);
+            try
+            {
+                var updated = await _service.UpdateAsync(id, category);
+                if (updated == null)
+                    return NotFound();
+                return Ok(updated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // DELETE: api/AssetCategory/{id}
@@ -80,10 +108,17 @@ namespace AssetManagement.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
-            var success = await _service.DeleteAsync(id);
-            if (!success)
-                return NotFound();
-            return NoContent();
+            try
+            {
+                var success = await _service.DeleteAsync(id);
+                if (!success)
+                    return NotFound();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
     }
 }

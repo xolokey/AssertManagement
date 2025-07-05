@@ -31,25 +31,32 @@ namespace AssetManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var allocations = await _service.GetAllAsync();
-
-            var dtoList = allocations.Select(a => new EmployeeAssetAllocationReadDto
+            try
             {
-                AllocationID = a.AllocationID,
+                var allocations = await _service.GetAllAsync();
 
-                /* ▶️  pass IDs so front‑end can filter */
-                EmployeeID = a.EmployeeID,
-                AssetID = a.AssetID,
+                var dtoList = allocations.Select(a => new EmployeeAssetAllocationReadDto
+                {
+                    AllocationID = a.AllocationID,
 
-                EmployeeName = a.Employee?.Name ?? $"Employee {a.EmployeeID}",
-                AssetNo = a.Asset?.AssetNo ?? "",
-                AssetName = a.Asset?.AssetName ?? $"Asset {a.AssetID}",
-                AllocationDate = a.AllocationDate,
-                ReturnDate = a.ReturnDate,
-                Status = a.Status
-            });
+                    /* ▶️  pass IDs so front‑end can filter */
+                    EmployeeID = a.EmployeeID,
+                    AssetID = a.AssetID,
 
-            return Ok(dtoList);
+                    EmployeeName = a.Employee?.Name ?? $"Employee {a.EmployeeID}",
+                    AssetNo = a.Asset?.AssetNo ?? "",
+                    AssetName = a.Asset?.AssetName ?? $"Asset {a.AssetID}",
+                    AllocationDate = a.AllocationDate,
+                    ReturnDate = a.ReturnDate,
+                    Status = a.Status
+                });
+
+                return Ok(dtoList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
 
@@ -57,23 +64,30 @@ namespace AssetManagement.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var a = await _service.GetByIdAsync(id);
-            if (a == null) return NotFound();
-
-            var dto = new EmployeeAssetAllocationReadDto
+            try
             {
-                AllocationID = a.AllocationID,
-                EmployeeID = a.EmployeeID,
-                AssetID = a.AssetID,
-                EmployeeName = a.Employee?.Name ?? $"Employee {a.EmployeeID}",
-                AssetNo = a.Asset?.AssetNo ?? "",
-                AssetName = a.Asset?.AssetName ?? $"Asset {a.AssetID}",
-                AllocationDate = a.AllocationDate,
-                ReturnDate = a.ReturnDate,
-                Status = a.Status
-            };
+                var a = await _service.GetByIdAsync(id);
+                if (a == null) return NotFound();
 
-            return Ok(dto);
+                var dto = new EmployeeAssetAllocationReadDto
+                {
+                    AllocationID = a.AllocationID,
+                    EmployeeID = a.EmployeeID,
+                    AssetID = a.AssetID,
+                    EmployeeName = a.Employee?.Name ?? $"Employee {a.EmployeeID}",
+                    AssetNo = a.Asset?.AssetNo ?? "",
+                    AssetName = a.Asset?.AssetName ?? $"Asset {a.AssetID}",
+                    AllocationDate = a.AllocationDate,
+                    ReturnDate = a.ReturnDate,
+                    Status = a.Status
+                };
+
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
 
@@ -81,25 +95,39 @@ namespace AssetManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeAssetAllocationCreateDto dto)
         {
-            var allocation = new EmployeeAssetAllocation
+            try
             {
-                EmployeeID = dto.EmployeeID,
-                AssetID = dto.AssetID,
-                AllocationDate = dto.AllocationDate,
-                ReturnDate = dto.ReturnDate,
-                Status = dto.Status
-            };
+                var allocation = new EmployeeAssetAllocation
+                {
+                    EmployeeID = dto.EmployeeID,
+                    AssetID = dto.AssetID,
+                    AllocationDate = dto.AllocationDate,
+                    ReturnDate = dto.ReturnDate,
+                    Status = dto.Status
+                };
 
-            var created = await _service.CreateAsync(allocation);
-            return CreatedAtAction(nameof(GetById), new { id = created.AllocationID }, created);
+                var created = await _service.CreateAsync(allocation);
+                return CreatedAtAction(nameof(GetById), new { id = created.AllocationID }, created);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // PUT: api/EmployeeAssetAllocation/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, EmployeeAssetAllocation allocation)
         {
-            var updated = await _service.UpdateAsync(id, allocation);
-            return updated == null ? NotFound() : Ok(updated);
+            try
+            {
+                var updated = await _service.UpdateAsync(id, allocation);
+                return updated == null ? NotFound() : Ok(updated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // PUT: api/EmployeeAssetAllocation/approve
@@ -107,18 +135,32 @@ namespace AssetManagement.Controllers
         [HttpPut("approve")]
         public async Task<IActionResult> Approve([FromBody] AllocationApproveDto dto)
         {
-            if (dto == null) return BadRequest("Payload required");
+            try
+            {
+                if (dto == null) return BadRequest("Payload required");
 
-            var result = await _service.ApproveAsync(dto.EmployeeID, dto.AssetID);
-            return Ok(result);
+                var result = await _service.ApproveAsync(dto.EmployeeID, dto.AssetID);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
 
         // DELETE: api/EmployeeAssetAllocation/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var deleted = await _service.DeleteAsync(id);
-            return deleted ? NoContent() : NotFound();
+            try
+            {
+                var deleted = await _service.DeleteAsync(id);
+                return deleted ? NoContent() : NotFound();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
         }
     }
 }
