@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: #f0f2f5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* === Fullscreen Login Background with Spline === */
+.login-bg {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow: hidden;
+  background-color: #0d1b2a; /* fallback background */
+}
+
+/* === Embed Spline Background === */
+.login-bg spline-viewer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* Allows user interaction on top */
+}
+
+/* === Gradient Overlay for Better Contrast === */
+.login-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25));
+  z-index: 0;
+  backdrop-filter: blur(2px);
+}
+
+/* === Glassmorphism Card Styling === */
+.login-bg > .card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+/* === Input Styling === */
+.form-control {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: none;
+  font-size: 1rem;
+  width: 100%;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+}
+
+.form-control:focus {
+  border: none;
+  outline: 2px solid #0d6efd;
+  box-shadow: 0 0 8px rgba(13, 110, 253, 0.4);
+}
+
+/* === Button Styling === */
+.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(to right, #0d6efd, #6610f2);
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.35);
+}
+
+/* === Headings in Card === */
+.card h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+/* === Responsive Improvements === */
+@media (max-width: 576px) {
+  .login-bg::before {
+    background: rgba(0, 0, 0, 0.65);
+  }
+
+  .login-bg > .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .card h2 {
+    font-size: 1.5rem;
+  }
+}

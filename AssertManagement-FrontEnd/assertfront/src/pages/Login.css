@@ -1,0 +1,57 @@
+/* Split Layout for Login Page */
+.split-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+}
+
+/*  Left Panel: Login Form  */
+.left-panel {
+  flex: 1;
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+}
+
+.left-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+  z-index: 0;
+}
+
+/* Put logo at top left */
+.top-left-logo {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  height: 100px;
+  width: auto;
+  z-index: 10;
+}
+
+/* Put login form over the background */
+.left-panel .login-card {
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* === Right Panel: Spline Viewer === */
+.right-panel {
+  flex: 1.3;
+  position: relative;
+}
+
+.right-panel spline-viewer {
+  position: absolute;
+  top:'2in';
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
