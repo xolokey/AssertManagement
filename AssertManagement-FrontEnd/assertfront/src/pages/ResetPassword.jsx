@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import axios from '../api/axiosInstance';
 import { useSearchParams } from 'react-router-dom';
+import axios from '../api/axiosInstance';
 
 import logo from '../assets/logotrans.png';
-import bg from '../assets/bg.jpg';
 
-const ResetPassword = () => {
+export default function ResetPassword() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
 
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [message, setMessage] = useState('');
-  const [hover, setHover] = useState(false); // 👈 hover state
+  const [hover, setHover] = useState(false);
 
   const handleReset = async (e) => {
     e.preventDefault();
@@ -24,63 +23,82 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post('/auth/reset-password', {
+      const res = await axios.post('/auth/reset-password', {
         token,
-        newPassword: password
+        newPassword: password,
       });
-      setMessage('✅ ' + response.data);
+      setMessage('✅ ' + res.data);
     } catch (err) {
       setMessage('❗ ' + (err.response?.data || 'Something went wrong'));
     }
   };
 
   const styles = {
-    page: {
-      minHeight: '100vh',
-      backgroundImage: `url(${bg})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+    container: {
+      height: '100vh',
+      width: '100%',
+      backgroundColor: '#111',
+      overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
+      paddingLeft: '6%',
+      position: 'relative',
+      fontFamily: 'Poppins, sans-serif',
+    },
+    spline: {
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      width: '60%',
+      height: '100%',
+      zIndex: 0,
+      pointerEvents: 'none',
+    },
+    logo: {
+      position: 'absolute',
+      top: '1rem',
+      left: '1.5rem',
+      height: '60px',
+      width: 'auto',
+      zIndex: 10,
     },
     card: {
+      zIndex: 2,
       width: '100%',
       maxWidth: '400px',
-      background: 'rgba(0,0,0,0.7)',
+      background: 'rgba(0, 0, 0, 0.55)',
       padding: '2rem',
       borderRadius: '16px',
       color: '#fff',
-      boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
-      backdropFilter: 'blur(10px)',
+      backdropFilter: 'blur(6px)',
+      animation: 'fadeInUp 0.9s ease',
     },
-    logo: {
-      display: 'block',
-      margin: '0 auto 0.5rem',
-      height: '300px',
-      marginTop: '-7rem',
-      marginBottom: '-5rem',
-
+    heading: {
+      fontSize: '1.6rem',
+      fontWeight: 600,
+      color: '#ffffffcc',
+      marginBottom: '1.25rem',
+      textAlign: 'center',
     },
     input: {
       width: '100%',
-      padding: '0.6rem',
-      borderRadius: '6px',
-      border: '1px solid #ccc',
-      marginBottom: '1rem',
-      backgroundColor: 'rgba(255,255,255,0.1)',
+      padding: '0.75rem',
+      borderRadius: '8px',
+      border: '1px solid rgba(255, 255, 255, 0.25)',
+      background: 'rgba(255, 255, 255, 0.10)',
       color: '#fff',
+      marginBottom: '1rem',
     },
     button: {
       width: '100%',
-      padding: '0.6rem',
-      backgroundColor: '#0d6efd',
+      padding: '0.75rem',
       border: 'none',
-      borderRadius: '6px',
-      color: 'white',
-      fontWeight: 'bold',
+      borderRadius: '8px',
+      backgroundColor: '#0d6efd',
+      color: '#fff',
+      fontWeight: 600,
       cursor: 'pointer',
-      transition: 'transform .15s ease, box-shadow .15s ease',
+      transition: 'transform 0.15s ease, box-shadow 0.15s ease',
       ...(hover && {
         transform: 'translateY(-1px)',
         boxShadow: '0 4px 12px rgba(13,110,253,0.5)',
@@ -94,25 +112,33 @@ const ResetPassword = () => {
   };
 
   return (
-    <div style={styles.page}>
+    <div style={styles.container}>
+      <spline-viewer
+        url="https://prod.spline.design/WlWQiM7Btr76TSOr/scene.splinecode"
+        style={styles.spline}
+      ></spline-viewer>
+
+      <img src={logo} alt="HexaTrack" style={styles.logo} />
+
       <form style={styles.card} onSubmit={handleReset}>
-        <img src={logo} alt="HexaTrack Logo" style={styles.logo} />
-        <h4 className="text-center mb-4">Reset Password</h4>
+        <h4 style={styles.heading}>
+          🔐 Reset your password
+        </h4>
 
         <input
           type="password"
-          placeholder="New Password"
-          value={password}
+          placeholder="New password"
           required
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={styles.input}
         />
 
         <input
           type="password"
-          placeholder="Confirm Password"
-          value={confirm}
+          placeholder="Confirm new password"
           required
+          value={confirm}
           onChange={(e) => setConfirm(e.target.value)}
           style={styles.input}
         />
@@ -122,8 +148,6 @@ const ResetPassword = () => {
           style={styles.button}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          onFocus={() => setHover(true)}
-          onBlur={() => setHover(false)}
         >
           Reset Password
         </button>
@@ -132,6 +156,5 @@ const ResetPassword = () => {
       </form>
     </div>
   );
-};
+}
 
-export default ResetPassword;

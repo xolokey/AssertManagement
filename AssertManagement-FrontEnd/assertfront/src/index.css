@@ -5,7 +5,7 @@ body {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  background-color: #f0f2f5;
+  background-color: #000000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -124,3 +124,45 @@ code {
     font-size: 1.5rem;
   }
 }
+
+@keyframes glowAnim {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* @keyframes glowPulse {
+  0% { opacity: 0.08; }
+  50% { opacity: 0.16; }
+  100% { opacity: 0.08; }
+} */
+
+/* @keyframes glowPulse {
+  0%, 100% { opacity: 0.07; }
+  50% { opacity: 0.16; }
+} */
+
+@keyframes softPulse {
+  0%, 100% {
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.07;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.18;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../api/axiosInstance';
 
 export default function AddEditCategoryForm({ category, onClose }) {
-  const isEdit = category && category.assetCategoryID;
+  const isEdit = category?.assetCategoryID;
 
   const [form, setForm] = useState({
     categoryName: '',
@@ -35,7 +35,7 @@ export default function AddEditCategoryForm({ category, onClose }) {
       }
       onClose();
     } catch (err) {
-      alert(`Save failed:\n${err.response?.data || err.message}`);
+      alert(`❌ Save failed:\n${err.response?.data || err.message}`);
       console.error('Category save failed:', err);
     }
   };
@@ -49,6 +49,7 @@ export default function AddEditCategoryForm({ category, onClose }) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: '40px 16px',
     zIndex: 1050,
   };
 
@@ -62,9 +63,6 @@ export default function AddEditCategoryForm({ category, onClose }) {
     boxShadow: '0 8px 24px rgba(0,0,0,.6)',
   };
 
-  const labelCls = 'form-label text-white-50 fw-semibold mb-1';
-  const inputCls = 'form-control bg-input text-white';
-
   return (
     <div style={backdrop} onClick={onClose}>
       <div style={card} onClick={(e) => e.stopPropagation()}>
@@ -74,12 +72,16 @@ export default function AddEditCategoryForm({ category, onClose }) {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="form-label">Category Name</label>
+            <label className="form-label" htmlFor="categoryName">
+              Category Name
+            </label>
             <input
-              className="form-select"
+              id="categoryName"
               name="categoryName"
+              className="form-control"
               value={form.categoryName}
               onChange={handleChange}
+              placeholder="e.g., Laptop, Furniture"
               required
             />
           </div>

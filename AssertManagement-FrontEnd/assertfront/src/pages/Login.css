@@ -6,7 +6,7 @@
   background-color: #000;
 }
 
-/*  Left Panel: Login Form  */
+/* Left Panel: Login Form */
 .left-panel {
   flex: 1;
   position: relative;
@@ -14,7 +14,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000000;
+  background-color: #000;
+  z-index: 1;
 }
 
 .left-panel::before {
@@ -25,33 +26,54 @@
   z-index: 0;
 }
 
-/* Put logo at top left */
+/* Top-left logo */
 .top-left-logo {
   position: absolute;
   top: 1rem;
   left: 1.5rem;
   height: 100px;
   width: auto;
-  z-index: 10;
+  z-index: 2;
 }
 
-/* Put login form over the background */
+/* Login card */
 .left-panel .login-card {
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   max-width: 420px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-/* === Right Panel: Spline Viewer === */
+/* Input field backgrounds */
+.bg-input {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #f2f2f2;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bg-input::placeholder {
+  color: #ccc;
+}
+
+/* Right Panel: 3D Viewer */
 .right-panel {
   flex: 1.3;
   position: relative;
+  overflow: hidden;
+  background-color: #000;
 }
 
 .right-panel spline-viewer {
   position: absolute;
-  top:'2in';
+  top: 0;
   inset: 0;
   width: 100%;
   height: 100%;
+  display: block;
+  z-index: 1;
 }

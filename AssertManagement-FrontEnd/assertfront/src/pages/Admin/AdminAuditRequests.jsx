@@ -60,23 +60,57 @@ export default function AdminAuditRequests() {
     }
   };
 
-  const card = {
-    background: 'rgba(0,0,0,.75)',
+  const cardStyle = {
+    background: 'rgba(30, 30, 30, 0.85)',
+    backdropFilter: 'blur(6px)',
     borderRadius: 16,
     padding: '1.5rem',
     color: '#fff',
-    boxShadow: '0 8px 24px rgba(0,0,0,.6)',
+    boxShadow: '0 12px 28px rgba(0,0,0,0.45)',
+    marginTop: '1rem',
+  };
+
+  const badgeStyle = (status) => ({
+    padding: '6px 12px',
+    borderRadius: '999px',
+    fontSize: '0.75rem',
+    fontWeight: 600,
+    color: status === 'Completed' ? '#fff' : '#000',
+    backgroundColor:
+      status === 'Completed'
+        ? '#198754'
+        : status === 'Pending'
+        ? '#6c757d'
+        : '#ffc107',
+  });
+
+  const tableWrapper = {
+    overflowX: 'auto',
+    borderRadius: '12px',
+    background: 'rgba(20,20,20,0.85)',
+    boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+  };
+
+  const btnStyle = {
+    padding: '10px 18px',
+    borderRadius: 12,
+    border: 'none',
+    background: 'linear-gradient(90deg, #ffc107, #ffcd39)',
+    color: '#000',
+    fontWeight: 600,
+    boxShadow: '0 4px 12px rgba(255,193,7,0.3)',
+    transition: 'all 0.2s ease-in-out',
   };
 
   return (
     <div className="container-fluid px-3">
-      <div style={card}>
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h4 className="fw-semibold m-0">Audit Requests</h4>
+      <div style={cardStyle}>
+        <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+          <h4 className="fw-semibold m-0 text-white-50">Audit Requests</h4>
           <button
             onClick={triggerAll}
             disabled={sending}
-            className="btn btn-outline-warning"
+            style={btnStyle}
           >
             {sending ? 'Sending…' : 'Trigger Audit for All'}
           </button>
@@ -87,27 +121,51 @@ export default function AdminAuditRequests() {
         ) : audits.length === 0 ? (
           <p className="text-light">No audit requests found.</p>
         ) : (
-          <div className="table-responsive">
-            <table className="table table-dark table-striped align-middle mb-0">
+          <div style={tableWrapper}>
+            <table
+              style={{
+                width: '100%',
+                borderCollapse: 'collapse',
+                color: '#fff',
+                fontSize: '0.95rem',
+                minWidth: '800px',
+              }}
+            >
               <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Asset</th>
-                  <th>Employee</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                <tr style={{ background: '#fff', color: '#000' }}>
+                  <th style={{ padding: '14px 20px' }}>ID</th>
+                  <th style={{ padding: '14px 20px' }}>Asset</th>
+                  <th style={{ padding: '14px 20px' }}>Employee</th>
+                  <th style={{ padding: '14px 20px' }}>Date</th>
+                  <th style={{ padding: '14px 20px' }}>Status</th>
+                  <th style={{ padding: '14px 20px' }}>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {audits.map((a) => (
-                  <tr key={a.auditID}>
-                    <td>{a.auditID}</td>
-                    <td>{a.assetName}</td>
-                    <td>{a.employeeName}</td>
-                    <td>{a.requestDate?.split('T')[0]}</td>
-                    <td>{a.status}</td>
-                    <td>
+                {audits.map((a, idx) => (
+                  <tr
+                    key={a.auditID}
+                    style={{
+                      backgroundColor: idx % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent',
+                      borderTop: '1px solid rgba(255,255,255,0.05)',
+                      transition: 'background 0.3s',
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.background = 'rgba(255,255,255,0.03)')
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.background =
+                        idx % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent')
+                    }
+                  >
+                    <td style={{ padding: '14px 20px' }}>{a.auditID}</td>
+                    <td style={{ padding: '14px 20px' }}>{a.assetName}</td>
+                    <td style={{ padding: '14px 20px' }}>{a.employeeName}</td>
+                    <td style={{ padding: '14px 20px' }}>{a.requestDate?.split('T')[0]}</td>
+                    <td style={{ padding: '14px 20px' }}>
+                      <span style={badgeStyle(a.status)}>{a.status}</span>
+                    </td>
+                    <td style={{ padding: '14px 20px' }}>
                       <button
                         className={`btn btn-sm ${
                           a.status === 'Completed'
@@ -117,9 +175,7 @@ export default function AdminAuditRequests() {
                         onClick={() => markCompleted(a.auditID)}
                         disabled={a.status === 'Completed'}
                       >
-                        {a.status === 'Completed'
-                          ? 'Completed'
-                          : 'Mark Completed'}
+                        {a.status === 'Completed' ? 'Completed' : 'Mark Completed'}
                       </button>
                     </td>
                   </tr>
